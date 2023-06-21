@@ -10,6 +10,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.18.2",
+    "@react-native-community/geolocation": "^3.0.6",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
@@ -17,11 +19,15 @@
     "native-base": "^3.4.28",
     "react": "18.2.0",
     "react-native": "0.71.11",
+    "react-native-color-picker": "^0.6.0",
+    "react-native-maps": "^1.7.1",
+    "react-native-maps-directions": "^1.9.0",
     "react-native-safe-area-context": "^3.4.1",
     "react-native-screens": "^3.21.1",
     "react-native-svg": "^12.1.1",
     "react-redux": "^8.1.0",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

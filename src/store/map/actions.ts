@@ -1,6 +1,6 @@
-import { ADD_MARKER, DESELECT_MARKER, MapActionTypes, Marker, REMOVE_MARKER, SELECT_MARKER, SET_MARKERS, UPDATE_MARKER } from "./types";
+import { ADD_MARKER, DESELECT_MARKER, MapActionTypes, MarkerModel, REMOVE_MARKER, SELECT_MARKER, SET_MARKERS, UPDATE_MARKER } from "./types";
 
-export function addMarker(marker: Marker):MapActionTypes{
+export function addMarker(marker: MarkerModel):MapActionTypes{
     return {
         type: ADD_MARKER,
         payload: marker,
@@ -27,14 +27,14 @@ export function deselectMarker():MapActionTypes{
     }
 }
 
-export function updateMarker(marker: Marker):MapActionTypes{
+export function updateMarker(marker: MarkerModel):MapActionTypes{
     return {
         type: UPDATE_MARKER,
         payload: marker,
     }
 }
 
-export function setMarkers(markers: Marker[]):MapActionTypes{
+export function setMarkers(markers: MarkerModel[]):MapActionTypes{
     return {
         type: SET_MARKERS,
         payload: markers,

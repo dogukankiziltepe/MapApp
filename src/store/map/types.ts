@@ -1,14 +1,17 @@
 export interface InitialState{
-    markers: Marker[],
-    selectedMarker: Marker|null,
+    markers: MarkerModel[],
+    selectedMarker: MarkerModel|null,
 }
 
-export interface Marker{
+export interface Coordinates{
+    latitude: number,
+    longitude: number,
+}
+
+export interface MarkerModel{
     id: string,
-    lat: number,
-    lng: number,
-    title: string,
-    description: string,
+    coordinate: Coordinates,
+    name: string,
     color: string,
 }
 
@@ -21,7 +24,7 @@ export const SET_MARKERS = "SET_MARKERS"
 
 export interface AddMarkerAction{
     type: typeof ADD_MARKER,
-    payload: Marker,
+    payload: MarkerModel,
 }
 
 export interface RemoveMarkerAction{
@@ -40,12 +43,12 @@ export interface DeselectMarkerAction{
 
 export interface UpdateMarkerAction{
     type: typeof UPDATE_MARKER,
-    payload: Marker,
+    payload: MarkerModel,
 }
 
 export interface SetMarkersAction{
     type: typeof SET_MARKERS,
-    payload: Marker[],
+    payload: MarkerModel[],
 }
 
 
