@@ -1,6 +1,6 @@
 import React from 'react'
-import { Icon, Center, NativeBaseProvider } from "native-base";
-import { Path, G, Circle, SvgXml } from "react-native-svg";
+import { Icon} from "native-base";
+import {SvgXml } from "react-native-svg";
 export default function UserIcon(props:any) {
     const xml = `<?xml version="1.0" encoding="iso-8859-1"?>
     <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->

@@ -5,17 +5,21 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Modal from '../components/Modal'
 import Form from '../components/Form'
-import { useIsFocused } from '@react-navigation/native'
+import { CommonActions, useIsFocused, useNavigation } from '@react-navigation/native'
 import Geolocation from '@react-native-community/geolocation'
+import { MarkerDefaultColor } from '../assets/Colors'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import { MarkerModel } from '../store/map/types'
+import UserIcon from '../components/UserIcon'
 
-export default function Home(props:any) {
-  const [poi, setPoi] = React.useState<any>(null)
+export default function Home({route}:BottomTabScreenProps<any,"Home">) {
+  const [poi, setPoi] = React.useState<MarkerModel|null>(null)
   const [update,isUpdate] = React.useState(false)
   const [userLocation,setUserLocation] = React.useState<any>(null);
   const [modalVisible, setModalVisible] = React.useState(false);
+  const navigation = useNavigation();
   const isFocused = useIsFocused();
-  const params = props.route.params;
-  console.log(params)
+  const params = route.params;
   useEffect(() => {
     getCurrentPosition();
   },[])
@@ -42,7 +46,7 @@ export default function Home(props:any) {
     else{
       setPoi(null);
       isUpdate(false);
-      props.navigation.setParams({ poi: null,isUpdate:false });
+      navigation.dispatch(CommonActions.setParams({ poi: null,isUpdate:false }));
     }},[isFocused])
   return (
     <View style={styles.container}>
@@ -52,15 +56,15 @@ export default function Home(props:any) {
        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
        style={styles.map}
        region={{
-        latitude : update ? params.poi.coordinate.latitude : userLocation !== null ? userLocation.coords.latitude : 37.785834,
-        longitude: update ? params.poi.coordinate.longitude: userLocation !== null ? userLocation.coords.longitude : 40.406417,
+        latitude : update ? params?.poi.coordinate.latitude : userLocation !== null ? userLocation.coords.latitude : 37.785834,
+        longitude: update ? params?.poi.coordinate.longitude: userLocation !== null ? userLocation.coords.longitude : 40.406417,
          latitudeDelta: 0.015,
          longitudeDelta: 0.0121,
        }}
        onPress={(e) => onPoiClick(e)}
        onPoiClick={(e) => onPoiClick(e)}>
        {poi !== null ? (
-         <Marker coordinate={poi.coordinate} pinColor='#315748'>
+         <Marker coordinate={poi.coordinate} pinColor={poi.color ? poi.color : MarkerDefaultColor}>
            <Callout>
              <View>
                <Text>Place Id: {poi.placeId}</Text>
@@ -69,7 +73,16 @@ export default function Home(props:any) {
            </Callout>
          </Marker>
        ):null}
-       
+       {userLocation !== null ?
+          <Marker coordinate={{ latitude: userLocation.coords.latitude, longitude: userLocation.coords.longitude }} pinColor={'blue'}>
+            <UserIcon />
+            <Callout>
+              <View>
+                <Text>You are here</Text>
+              </View>
+            </Callout>
+          </Marker> : null
+        }
       </MapView>
 
       {poi !== null ? (

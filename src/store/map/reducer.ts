@@ -1,4 +1,4 @@
-import { InitialState, MapActionTypes } from "./types";
+import { InitialState, MapActionTypes, MarkerTypes } from "./types";
 
 export const initialState: InitialState = {
     markers: [],
@@ -10,27 +10,27 @@ export function mapReducer(
     action: MapActionTypes
   ): InitialState {
     switch (action.type) {
-        case "ADD_MARKER":
+        case MarkerTypes.ADD_MARKER:
             return {
                 ...state,
                 markers: [...state.markers, action.payload]
             }
-        case "REMOVE_MARKER":
+        case MarkerTypes.REMOVE_MARKER:
             return {
                 ...state,
                 markers: state.markers.filter(marker => marker.id !== action.payload)
             }
-        case "SELECT_MARKER":
+        case MarkerTypes.SET_MARKERS:
             return {
                 ...state,
-                selectedMarker: state.markers.find(marker => marker.id === action.payload) || null
+                markers: action.payload
             }
-        case "DESELECT_MARKER":
+        case MarkerTypes.DESELECT_MARKER:
             return {
                 ...state,
                 selectedMarker: null
             }
-        case "UPDATE_MARKER":
+        case MarkerTypes.UPDATE_MARKER:
             return {
                 ...state,
                 markers: state.markers.map(marker => marker.id === action.payload.id ? action.payload : marker)

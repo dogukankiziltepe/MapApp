@@ -1,6 +1,6 @@
 import React from 'react'
-import { Icon, Center, NativeBaseProvider } from "native-base";
-import { Path, G, Circle, SvgXml } from "react-native-svg";
+import { Icon} from "native-base";
+import {SvgXml } from "react-native-svg";
 export default function MarkerIcon(props:any) {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
     <svg width="800px" height="800px" viewBox="-4 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

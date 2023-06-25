@@ -10,44 +10,48 @@ export interface Coordinates{
 
 export interface MarkerModel{
     id: string,
+    placeId?: string,
     coordinate: Coordinates,
     name: string,
     color: string,
 }
 
-export const ADD_MARKER = "ADD_MARKER"
-export const REMOVE_MARKER = "REMOVE_MARKER"
-export const SELECT_MARKER = "SELECT_MARKER"
-export const DESELECT_MARKER = "DESELECT_MARKER"
-export const UPDATE_MARKER = "UPDATE_MARKER"
-export const SET_MARKERS = "SET_MARKERS"
+export enum MarkerTypes {
+    ADD_MARKER = "ADD_MARKER",
+    REMOVE_MARKER = "REMOVE_MARKER",
+    SELECT_MARKER = "SELECT_MARKER",
+    DESELECT_MARKER = "DESELECT_MARKER",
+    UPDATE_MARKER = "UPDATE_MARKER",
+    SET_MARKERS = "SET_MARKERS",
+}
+
 
 export interface AddMarkerAction{
-    type: typeof ADD_MARKER,
+    type: typeof MarkerTypes.ADD_MARKER,
     payload: MarkerModel,
 }
 
 export interface RemoveMarkerAction{
-    type: typeof REMOVE_MARKER,
+    type: typeof MarkerTypes.REMOVE_MARKER,
     payload: string,
 }
 
 export interface SelectMarkerAction{
-    type: typeof SELECT_MARKER,
+    type: typeof MarkerTypes.SELECT_MARKER,
     payload: string,
 }
 
 export interface DeselectMarkerAction{
-    type: typeof DESELECT_MARKER,
+    type: typeof MarkerTypes.DESELECT_MARKER,
 }
 
 export interface UpdateMarkerAction{
-    type: typeof UPDATE_MARKER,
+    type: typeof MarkerTypes.UPDATE_MARKER,
     payload: MarkerModel,
 }
 
 export interface SetMarkersAction{
-    type: typeof SET_MARKERS,
+    type: typeof MarkerTypes.SET_MARKERS,
     payload: MarkerModel[],
 }
 

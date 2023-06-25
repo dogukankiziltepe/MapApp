@@ -1,6 +1,5 @@
 import { Button, Container } from 'native-base'
 import React from 'react'
-import { Dimensions } from 'react-native'
 import { ColorPicker, fromHsv } from 'react-native-color-picker'
 
 export default function UserColorPicker(props:any) {
