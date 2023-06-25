@@ -14,7 +14,7 @@ import UserIcon from '../components/UserIcon'
 
 export default function Home({route}:BottomTabScreenProps<any,"Home">) {
   const [poi, setPoi] = React.useState<MarkerModel|null>(null)
-  const [update,isUpdate] = React.useState(false)
+  const [isUpdate,setIsUpdate] = React.useState(false)
   const [userLocation,setUserLocation] = React.useState<any>(null);
   const [modalVisible, setModalVisible] = React.useState(false);
   const navigation = useNavigation();
@@ -41,23 +41,23 @@ export default function Home({route}:BottomTabScreenProps<any,"Home">) {
     if(isFocused && params?.poi )
     {
       setPoi(params?.poi);
-      isUpdate(params?.isUpdate);
+      setIsUpdate(params?.isUpdate);
     }
     else{
       setPoi(null);
-      isUpdate(false);
+      setIsUpdate(false);
       navigation.dispatch(CommonActions.setParams({ poi: null,isUpdate:false }));
     }},[isFocused])
   return (
     <View style={styles.container}>
-      <Form isUpdate = {update} poi={poi ? poi : null} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+      <Form isUpdate = {isUpdate} poi={poi ? poi : null} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
 
     <MapView
        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
        style={styles.map}
        region={{
-        latitude : update ? params?.poi.coordinate.latitude : userLocation !== null ? userLocation.coords.latitude : 37.785834,
-        longitude: update ? params?.poi.coordinate.longitude: userLocation !== null ? userLocation.coords.longitude : 40.406417,
+        latitude : isUpdate ? params?.poi.coordinate.latitude : userLocation !== null ? userLocation.coords.latitude : 37.785834,
+        longitude: isUpdate ? params?.poi.coordinate.longitude: userLocation !== null ? userLocation.coords.longitude : 40.406417,
          latitudeDelta: 0.015,
          longitudeDelta: 0.0121,
        }}
@@ -86,7 +86,7 @@ export default function Home({route}:BottomTabScreenProps<any,"Home">) {
       </MapView>
 
       {poi !== null ? (
-         <Modal isUpdate = {update}  setModalVisible={setModalVisible} poi={poi} setPoi={setPoi}/>
+         <Modal isUpdate = {isUpdate}  setModalVisible={setModalVisible} poi={poi} setPoi={setPoi}/>
         ):null}
       
     </View>
